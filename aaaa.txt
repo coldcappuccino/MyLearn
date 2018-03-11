@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-aaaabbbbcccc
-=======
-aaaa
->>>>>>> parent of 114c6f0... 02
