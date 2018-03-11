@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-wwwwwww
-=======
-가가가가가가가가가가가가가가
->>>>>>> parent of ad4cff4... Revert "2"
