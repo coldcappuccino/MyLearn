@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neusoft.springmvc.dao.shoppingcart_Dao" >
+  
+  <resultMap id="BaseResultMap" type="edu.neusoft.springmvc.model.shoppingcart">
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="bookID" property="bookID" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="selectResource" resultMap="BaseResultMap">
+    select * from resource_role where roleID = ${_parameter}
+  </select>
+  
+   <insert id="addCart" parameterType="edu.neusoft.springmvc.model.shoppingcart" >
+     insert into shoppingcart values (#{price},#{number},#{bookID},#{uid})
+  </insert>
+  
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neusoft.springmvc.dao.BookDao" >
+  <resultMap id="BaseResultMap" type="edu.neusoft.springmvc.model.Book" >
+    <result column="bookname" property="bookname" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR"/>
+    <result column="cagID" property="cagID" jdbcType="VARCHAR"/>
+    <result column="bookID" property="bookID" jdbcType="INTEGER"/>
+     <result column="price" property="price" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="findproduct" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select * from book where cagID = #{cagid}
+  </select>
+  
+  <select id="findbybookid" resultMap="BaseResultMap" >
+     select * from book where bookID = ${_parameter}
+  </select>
+  
+  <insert id="addBook" parameterType="edu.neusoft.springmvc.model.Book" >
+     insert into book values (#{price},#{picture},#{describe},#{cagID},#{bookID},#{bookname})
+  </insert>
+  
+  <delete id="deleteBook">
+    delete from book where bookID = ${_parameter}
+  </delete>
+  
+  
+</mapper>

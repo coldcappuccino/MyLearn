@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neusoft.springmvc.dao.Rource_Role_Dao" >
+  
+  <resultMap id="BaseResultMap" type="edu.neusoft.springmvc.model.Rource_Role" >
+    <result column="sourceID" property="sourceID" jdbcType="INTEGER" />
+    <result column="roleID" property="roleID" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="selectResource" resultMap="BaseResultMap">
+    select * from resource_role where roleID = ${_parameter}
+  </select>
+  
+</mapper>

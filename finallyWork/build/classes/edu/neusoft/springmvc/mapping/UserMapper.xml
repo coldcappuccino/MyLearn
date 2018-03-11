@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neusoft.springmvc.dao.UserDao" >
+  <resultMap id="BaseResultMap" type="edu.neusoft.springmvc.model.User" >
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+     <result column="uid" property="uid" jdbcType="INTEGER" />
+     
+     <collection property="resources" ofType="edu.neusoft.springmvc.model.resource">
+      	  <id property="sourceID" column="sourceID"/>
+      	  <result property="sourcename" column="sourcename"/>
+      </collection>
+  </resultMap>
+  
+  <select id="userlogin" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select * from user where username = #{username}
+  </select>
+
+   <select id="SelectAllResource" resultMap="BaseResultMap">
+       select user.uid,resource.sourceID,resource.sourcename
+       from user
+       left join role_user on user.uid = role_user.uid
+       left join resource_role on role_user.roleID = resource_role.roleID
+       left join resource on resource_role.sourceID = resource.sourceID
+       where user.uid = #{arg0}
+   </select>
+     
+     
+  <insert id="userRegister" parameterType="edu.neusoft.springmvc.model.User" useGeneratedKeys="true" keyProperty="uid">
+     insert into user values (null,#{username},#{password})
+  </insert>
+  
+</mapper>

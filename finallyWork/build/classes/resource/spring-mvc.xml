@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"  xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd" >
+        
+    <!-- 注解扫描包 -->
+	<context:component-scan base-package="edu.neusoft.springmvc"/>
+	<!-- 开启注解 -->
+	<mvc:annotation-driven />
+    <!-- 自动扫描 cn.kolbe.spring.mvc 下的带有Spring组件注解的类 -->
+	<context:component-scan base-package="edu.neusoft.springmvc"/>
+
+<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+   <property name="prefix" value="fm_"/><!-- 指定文件前缀 -->
+   <property name="suffix" value=".ftl"/><!-- 指定文件后缀 -->
+   <property name="order" value="1"/><!-- 指定当前视图解析器的优先级 -->
+   <property name="contentType" value="text/html; charset=utf-8" /><!-- 指定编码类型输出，防止出现中文乱码现象 -->
+</bean>
+<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+   <property name="templateLoaderPath" value="/WEB-INF/freeMaker"/><!-- 指定模板文件存放位置 -->
+   <property name="defaultEncoding" value="UTF-8" /><!-- 由于模板文件中使用utf-8编码，如果不显式指定，会采用系统默认编码，易造成乱码 -->
+   <property name="freemarkerSettings"><!-- 定义FreeMaker丰富的自定义属性 -->
+    <props>
+        <prop key="classic_compatible">true</prop><!--  当碰到对象属性为null时，返回一个空字符串而非抛出系统异常 -->
+    </props>
+   </property>
+</bean>
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->  
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/html;charset=UTF-8</value>  
+            </list>  
+        </property>  
+    </bean>  
+   <!-- 配置文件上传-->
+   <bean name="multipartResolver"  
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+    <property name="defaultEncoding" value="UTF-8"></property>  
+   </bean>
+    
+    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->  
+            </list>  
+        </property>  
+    </bean> 
+	<!-- 配置视图解析器：将控制器方法返回值解析为实际物理视图 -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+        <property name="mediaTypes">  
+            <value>  
+                html=text/html  
+                json=application/json  
+            </value>  
+        </property>  
+        <property name="defaultContentType" value="text/html"/>  
+    </bean>     
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	        <property name="order" value="2"/>  <!-- 指定当前视图解析器的优先级 -->
+	        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>  
+	        <property name="viewResolvers">
+	            <list>
+	                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	                    <property name="prefix" value="/WEB-INF/pages/" /> <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+	                    <property name="suffix" value=".jsp"/>
+	                </bean>
+	            </list>
+	        </property>
+	        <property name="defaultViews">
+	            <list>
+	                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+	            </list>
+	        </property>
+     </bean>
+	    
+	    <mvc:annotation-driven/>
+	    <mvc:default-servlet-handler/> 
+	    
+	    <mvc:interceptors>  
+            <bean class="edu.neusoft.springmvc.interceptor.LoginInterceptor" />  
+        </mvc:interceptors>   
+       
+     <task:annotation-driven /> <!-- 定时器开关-->  
+  
+    <bean id="myTaskXml" class="edu.neusoft.springmvc.controller.TimeTaskController"></bean>  
+  
+    <task:scheduled-tasks>  
+        <!--  
+            这里表示的是每隔五秒执行一次  
+        -->  
+        <task:scheduled ref="myTaskXml" method="job1" cron="*0 0 12 * * ?" />  
+    </task:scheduled-tasks>  
+      
+    <!-- 自动扫描的包名 -->    
+    <context:component-scan base-package="edu.neusoft.springmvc.controller" />  
+</beans>
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.neusoft.springmvc.dao.CategoryDao" >
+  
+  <resultMap id="BaseResultMap" type="edu.neusoft.springmvc.model.Category" >
+    <result column="cagID" property="cagID" jdbcType="VARCHAR" />
+    <result column="cagName" property="cagName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectAllCategory" resultMap="BaseResultMap">
+    select * from category
+  </select>
+  
+</mapper>

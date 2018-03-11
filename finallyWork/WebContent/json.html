@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>  
+    <script>
+	        window.onload = function(){
+	        	var m = 0;
+	     	    var PaxNames = new Array();
+	     	    for(var i= 1; i<=3;i++){
+	     	        var paxName = {};
+	     	    
+	     	        var username = m;
+	     	        var password = m;
+	     	        var uid = m;
+	     	        
+	     	         m++;
+	     	        paxName.username=username;
+	     	        paxName.password=password;
+	     	        paxName.uid=uid;
+	     	        PaxNames.push(paxName);  
+	     	    }
+	     	   var data = JSON.stringify(PaxNames);
+	     	  
+	           var temp = eval(data)
+	     	   for(var i=0,l=temp.length;i<l;i++){
+	     	       console.log(temp[i].uid);
+	     	   }
+	     	   
+	     	    var str = "json/test?str="+JSON.stringify(PaxNames);
+	    	    document.getElementById('test').href = str;
+	        }
+    </script>
+    <a id="test" href="">跳转</a>
+    
+</body>
+</html>
+
+
