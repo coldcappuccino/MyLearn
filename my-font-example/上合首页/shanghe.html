@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,ul,li,p,h1,h2,h3,h4,h5,h6,input,dl,dd,dt{
+			margin:0;
+			padding:0;
+		}
+
+		body{
+           font-size: 12px;
+           font-family: 宋体;
+		}
+
+		img{
+			border:0 none;
+		}
+
+		li{
+			list-style:none;
+		}
+
+		a{
+			text-decoration: none; 
+		}
+		input{
+			border:0 none;
+			outline-style: 0 none;
+		}
+
+		.clearfix:after{
+			content: ".";
+			display: block;
+			visibility: hidden;
+			clear: both;
+			height:0px;
+		}
+
+		.fl{
+			float:left;
+		}
+
+		.fr{
+			float:right;
+		}
+
+		.header{
+			height:39px;
+			width:980px;
+			margin:20px auto 0px;
+		}
+
+		.logo{
+			width:179px;
+			height:39px;
+		}
+
+		.search{
+			width:195px;
+			height:30px;
+			border:1px solid #ECECEC;
+		}
+
+		.search input[type="text"]{
+			width:165px;
+			height:30px;
+			vertical-align:top;
+		}
+
+		.search input[type="button"]{
+			width:30px;
+			height:30px;
+			vertical-align:top;
+		}
+
+		.nav{
+			width:100%;
+			height:55px;
+			background: url("./images/nav_bg.png");
+		}
+
+		.nav-con{
+			width:980px;
+			height:55px;
+			margin:0 auto;
+		}
+
+		.nav .nav-con ul li{
+			float:left;
+		}
+
+		.nav-con ul li a{
+			display:inline-block;
+			padding:0px 20px;
+			height:55px;
+			line-height:55px;
+			color:#000;
+			font-size: 12px;
+			font-family: 宋体;
+			font-weight: 700;
+			background:url("./images/nav_bg-line.png") no-repeat right;
+		}
+
+		.nav-con ul li a:hover{
+			color:#7cb609;
+		}
+
+		.banner{
+			width: 980px;
+			height: 597px;
+			margin:0 auto;
+		}
+
+		.message{
+			width:100%;
+			height: 32px;
+			background: #FBFBFB;
+			border-bottom: 1px solid #EFEFEF;
+			border-top:1px solid #EFEFEF;
+		}
+
+		.message-con{
+			width: 980px;
+			height: 32px;
+			margin:0 auto;
+		}
+		
+		.message-con-l{
+		   	font-size: 12px;
+		   	font-family: 宋体;
+		   	height:32px;
+		   	line-height: 32px;
+		}
+
+		.message-con-r img{
+			height: 16px;
+			margin-top: 8px;
+		}
+		
+		.news{
+			width:980px;
+			margin:0 auto;
+		}
+
+		.news-l{
+			width: 310px;
+		}
+
+		.news-cen{
+			width: 373px;
+			margin-left: 12px;
+		}
+
+		.news-r{
+			width: 268px;
+		}
+
+		.news-l,.news-cen,.news-r{
+			height: 224px;
+			border:1px solid #E4E4E4;
+			position: relative;
+		}
+
+		.new-title{
+			color:#7AB800;
+			margin:10px 0 0 5px;
+			font-size: 12px;
+			font-family: 宋体;
+		}
+
+		.new-title img{
+			vertical-align: middle;
+		}
+		
+		.pic-cen{
+			position: absolute;
+			top:50px;
+			left:60px;
+		}
+
+		.pic-left{
+			position: absolute;
+			top:100px;
+			left:20px;
+
+		}
+
+		.pic-right{
+			position: absolute;
+			top:100px;
+			right:20px;
+		}
+
+		.news-cen ul{
+			margin-top: 10px;
+			margin-left: 24px;
+			margin-right: 10px;
+		}
+
+		.news-cen ul li{
+			font-family: 宋体;
+			font-size: 12px;
+			line-height: 27px;
+			height: 27px;
+			border-bottom:1px dashed #DCDCDC;
+		}
+
+		.news-r ul{
+			margin-top: 10px;
+			margin-left: 24px;
+		}
+
+		.news-r ul li{
+			font-family: 宋体;
+			font-size: 12px;
+			border-left: 3px solid #7AB800;
+			height:15px;
+			line-height: 15px;
+			margin-top: 10px;
+			padding-left: 5px;
+		}
+
+		.news-r p{
+			font-family: 宋体;
+			font-size: 12px;
+			margin-top: 20px;
+			margin-left: 24px;
+
+		}
+
+		.footer{
+			width:100%;
+			height:180px;
+			background:#2D2D2D;
+			border-bottom: 1px dashed #414141
+		}
+
+		.footer-con{
+			width:980px;
+			margin:0 auto;
+		}
+
+		.footer-con dl{
+			float:left;
+			margin-top: 10px;
+			margin-right:20px;
+		}
+
+		.footer-con dl dt{
+			color:#707070;
+		}
+
+		.footer-con dl dd{
+			margin-top: 20px;
+		}
+
+		.bot{
+			width:100%;
+			height: 100px;
+			background: #2D2D2D;
+			padding-top: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="logo fl">
+			<img src="./images/logo.jpg">
+		</div>
+		<div class="search fr"><input type="text" style="text"><input type="button"></div>
+	</div>
+	<div class="nav">
+		<div class="nav-con">
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li><a href="#">智能手机</a></li>
+				<li><a href="#">平板电脑</a></li>
+				<li><a href="#">配件</a></li>
+				<li><a href="#">服务支持</a></li>
+				<li><a href="#">关于尚合</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="banner"><img src="./images/banner.jpg" alt=""></div>
+	<div class="message">
+		<div class="message-con">
+			<div class="message-con-l fl">
+				最新公告：尚合Aone智能手机入网证已获取工信部门审批下发。尚合官网
+			</div>
+			<div class="message-con-r fr">
+				<img src="./images/renren.png" alt="">
+				<img src="./images/weibo.png" alt="">
+				<img src="./images/xinlang.png" alt="">
+				<img src="./images/zone.png" alt="">
+			</div>
+		</div>
+	</div>
+	<div class="news clearfix">
+		<div class="news-l fl">
+			<div class="new-title">
+				<img src="images/o.jpg" alt="">
+				新闻中心
+			</div>
+			<div class="pic-cen">
+				<img src="images/home_hot_01.png" alt="">
+			</div>
+			<div class="pic-left">
+				<img src="images/left.png" alt="">
+			</div>
+			<div class="pic-right">
+				<img src="images/right.png" alt="">
+			</div>
+		</div>
+		<div class="news-cen fl">
+			<div class="new-title">
+				<img src="images/o.jpg" alt="">
+				新闻发布
+			</div>
+			<ul>
+				<li style="color:#FF0000">致歉公告</li>
+				<li>首批尚合Aonet已全部售馨!</li>
+				<li>【媒体报导】国产高性价比 尚合Aonet四核手机评测</li>
+				<li>尚合Aone智能手机入网证已经获工信部门审批下发.</li>
+				<li>我司通过ISO9001:2008国际质量管理体系认证</li>
+				<li>我司产品已经通过了国家强制性产品3C认证</li>
+			</ul>
+		</div>
+		<div class="news-r fr">
+			<div class="new-title">
+				<img src="images/o.jpg" alt="">
+				技术支持
+			</div>
+			<ul>
+				<li>售后服务</li>
+				<li>投诉与建议</li>
+				<li>联保网点</li>
+				<li>常见问题FAQ</li>
+			</ul>
+			<p>
+				深圳市汇聚众合科技发展有限公司<br/>
+				服务热线：400-633-7922
+			</p>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footer-con">
+			<dl>
+				<dt>尚合首页</dt>
+				<dd>返回首页</dd>
+			</dl>
+			<dl>
+				<dt>尚合首页</dt>
+				<dd>返回首页</dd>
+			</dl>
+			<dl>
+				<dt>尚合首页</dt>
+				<dd>返回首页</dd>
+			</dl>
+			<dl>
+				<dt>尚合首页</dt>
+				<dd>返回首页</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="bot">
+			深圳市会居中和优先公司深圳市会居中和优先公司深圳市会居中和优先公司深圳市<br/>
+			会居中和优先公司深圳市会居中和优先公司深圳市会居中和优先公司
+	</div>
+</body>
+</html>
