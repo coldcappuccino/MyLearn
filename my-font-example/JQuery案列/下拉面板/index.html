@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        ul,li{
+            list-style: none;
+
+        }
+
+        .container{
+            margin:100px auto;
+            width: 500px;
+        }
+
+        .tab-span{
+            display: inline-block;
+            width: 101px;
+            height: 20px;
+            background: darkgreen;
+            color:#000;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .block-div{
+            width: 100px;
+            height: 100px;
+            border:1px solid #000000;
+            border-top:0px;
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var tab_span = $(".tab-span");
+            var block_div = $(".block-div");
+
+            tab_span.click(function(){
+                var span_index = $(this).parent().index();
+                block_div.each(function(index,ele){
+                    if(span_index === index){
+                        $(ele).show();
+                    }else{
+                        $(ele).hide();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li>
+                <span class="tab-span">选项卡一</span>
+                <div class="block-div">这是选项卡一</div>
+            </li>
+            <li>
+                <span class="tab-span">选项卡二</span>
+                <div class="block-div">这是选项卡二</div>
+            </li>
+            <li>
+                <span class="tab-span">选项卡三</span>
+                <div class="block-div">这是选项卡三</div>
+            </li>
+            <li>
+                <span class="tab-span">选项卡四</span>
+                <div class="block-div">这是选项卡四</div>
+            </li>
+            <li>
+                <span class="tab-span">选项卡五</span>
+                <div class="block-div">这是选项卡五</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

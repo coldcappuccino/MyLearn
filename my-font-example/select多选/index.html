@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+
+        select{
+            margin-left: 100px;
+        }
+
+        .but-list{
+            width: 100px;
+            display: inline-block;
+            margin-left: 100px;
+        }
+
+        .but-list button{
+            width: 100px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var sel1 = document.getElementById("sel1");
+            var sel2 = document.getElementById("sel2");
+            var sel1Arr = document.querySelectorAll("#sel1 option");
+            var sel2Arr = document.querySelectorAll("#sel2 option");
+
+            var but_toright = document.querySelector(".but-list button:nth-child(1)");
+            var but_toleft = document.querySelector(".but-list button:nth-child(2)");
+
+
+            but_toleft.onclick = handleExchange.bind(this,sel2Arr,sel1,sel2);
+
+            but_toright.onclick = handleExchange.bind(this,sel1Arr,sel2,sel1);
+
+            function handleExchange(selArr,sel_append,sel_remove){
+                var tempArr = [];
+                for(var i=0;i<selArr.length;i++){
+                    if(selArr[i].selected === true){
+                        tempArr.push(selArr[i]);
+                    }
+                }
+                for(var j=0;j<tempArr.length;j++){
+                    sel_append.appendChild(tempArr[j].cloneNode(true));
+                    sel_remove.removeChild(tempArr[j]);
+                }
+                sel1Arr = document.querySelectorAll("#sel1 option");
+                sel2Arr = document.querySelectorAll("#sel2 option");
+                but_toleft.onclick = handleExchange.bind(this,sel2Arr,sel1,sel2);
+                but_toright.onclick = handleExchange.bind(this,sel1Arr,sel2,sel1);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<select multiple="multiple" size="10" name="" id="sel1" >
+      <option value="">选项一</option>
+      <option value="">选项二</option>
+      <option value="">选项三</option>
+      <option value="">选项四</option>
+</select>
+<div class="but-list">
+    <button>>></button>
+    <button><<</button>
+</div>
+<select multiple="multiple" size="10" name="" id="sel2" >
+    <option value="">选项五</option>
+    <option value="">选项六</option>
+    <option value="">选项七</option>
+    <option value="">选项八</option>
+</select>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            margin: 100px auto;
+            width: 400px;
+            padding: 50px;
+            border:1px solid #999;
+            background: #EFEFEF;
+            line-height: 40px;
+        }
+
+        .box label{
+            display: inline-block;
+            width: 40px;
+        }
+
+        .box span{
+            display: inline-block;
+            color:#ccc;
+            padding:0px 20px;
+            font-size: 12px;
+            height: 16px;
+            line-height: 16px;
+            margin-left: 10px;
+        }
+
+        .box span.right{
+            color:green;
+            background: url("images/right.png") no-repeat;
+        }
+
+        .box span.wrong{
+            color:red;
+            background: url("images/error.png") no-repeat;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取dom对象
+            function $(id){
+                return document.getElementById(id);
+            }
+            //设置innerhtml
+            function setInnerHtml(ele,text){
+                ele.innerHTML = text;
+            }
+            //设置class
+            function setClassName(ele,Name){
+                ele.className = Name;
+            }
+
+            //添加回调函数
+            function change(id,fn){
+                $(id).onblur = fn;
+            }
+
+            //验证QQ号码
+            change("inp1",function () {
+                var span = this.nextSibling;
+                if (/^[1-9][0-9]{4,}$/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+            //验证手机
+            change("inp2",function () {
+                var span = this.nextSibling;
+                if (/^((13[0-9])|(15[^4,\D])|(18[0-9]))\d{8}$/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+            //验证邮箱
+            change("inp3",function () {
+                var span = this.nextSibling;
+                if (/^[\w\-\.]+\@[\w]+\.[\w]{2,4}$/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+            //验证座机
+            change("inp4",function () {
+                var span = this.nextSibling;
+                if (/^0\d{2}-\d{8}$|^0\d{3}-\d{7}$/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+            //验证账号
+            change("inp5",function () {
+                var span = this.nextSibling;
+                if (/^[a-zA-Z0-9_-]{3,16}$/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+            //验证密码
+            change("inp6",function () {
+                var span = this.nextSibling;
+                if (/^[a-zA-Z0-9_-]{6,18}/.test(this.value)){
+                    setInnerHtml(span,"输入正确");
+                    setClassName(span,"right");
+                }else{
+                    setInnerHtml(span,"您的输入有误")
+                    setClassName(span,"wrong");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <label for="inp1">QQ</label><input type="text" id="inp1"><span>输入正确的QQ号码</span><br>
+        <label for="inp2">手机</label><input type="text" id="inp2"><span>输入13位手机号码</span><br>
+        <label for="inp3">邮箱</label><input type="text" id="inp3"><span>输入正确邮箱</span><br>
+        <label for="inp4">座机</label><input type="text" id="inp4"><span>输入您的座机</span><br>
+        <label for="inp5">账号</label><input type="text" id="inp5"><span>请输入您的账号</span><br>
+        <label for="inp6">密码</label><input type="text" id="inp6"><span>请输入您的密码</span><br>
+    </div>
+
+</body>
+</html>

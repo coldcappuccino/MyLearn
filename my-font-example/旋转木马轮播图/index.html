@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/css1.css">
+    <style>
+
+    </style>
+    <script src="animate.js"></script>
+    <script>
+        window.onload = function () {
+            var json = [
+                {   //  1
+                    "width":400,
+                    "top":70,
+                    "left":50,
+                    "opacity":20,
+                    "z-index":2
+                },
+                {  // 2
+                    "width":600,
+                    "top":120,
+                    "left":0,
+                    "opacity":80,
+                    "z-index":3
+                },
+                {   // 3
+                    "width":800,
+                    "top":100,
+                    "left":200,
+                    "opacity":100,
+                    "z-index":4
+                },
+                {  // 4
+                    "width":600,
+                    "top":120,
+                    "left":600,
+                    "opacity":80,
+                    "z-index":3
+                },
+                {   //5
+                    "width":400,
+                    "top":70,
+                    "left":750,
+                    "opacity":20,
+                    "z-index":2
+                }
+            ];
+            var wrap = document.getElementsByClassName("wrap")[0];
+            var prev = document.querySelector(".arrow .prev");
+            var next = document.querySelector(".arrow .next");
+            var liArr = document.querySelectorAll(".slider ul li");
+
+            wrap.onmouseover = function(){
+                animate(prev,{opacity:100});
+                animate(next,{opacity:100});
+            }
+
+            wrap.onmouseout = function(){
+                animate(prev,{opacity:0});
+                animate(next,{opacity:0});
+            }
+
+            initLIArr();
+
+            prev.onclick = function(){
+                var theFirst = json.shift();
+                json.push(theFirst);
+
+                initLIArr();
+            }
+
+            next.onclick = function(){
+
+                var theLast = json.pop();
+                json.unshift(theLast);
+
+                initLIArr();
+            }
+
+            function initLIArr(){
+                for(var i=0;i<liArr.length;i++){
+                    animate(liArr[i],{
+                        "width":json[i].width,
+                        "top":json[i].top,
+                        "left":json[i].left,
+                        "opacity":json[i].opacity,
+                        "z-index":json[i]["z-index"]
+                    })
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <!--滑动部分-->
+        <div class="slider">
+            <ul>
+                <li><img src="./images/slidepic1.jpg" alt=""></li>
+                <li><img src="./images/slidepic2.jpg" alt=""></li>
+                <li><img src="./images/slidepic3.jpg" alt=""></li>
+                <li><img src="./images/slidepic4.jpg" alt=""></li>
+                <li><img src="./images/slidepic5.jpg" alt=""></li>
+            </ul>
+        </div>
+        <!--左右箭头部分-->
+        <div class="arrow">
+            <div class="prev"></div>
+            <div class="next"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

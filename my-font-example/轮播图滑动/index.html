@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        a{
+            text-decoration: none;
+            color:#000000;
+        }
+
+        ul,li{
+            list-style: none;
+        }
+
+        .box{
+            margin-top: 150px;
+            margin-left: 550px;
+            position: relative;
+            width: 490px;
+            height: 170px;
+            padding:5px;
+            border:1px solid #A6A6A6;
+        }
+
+        .content-pic{
+            position: relative;
+            width: 490px;
+            height: 170px;
+            overflow: hidden;
+        }
+
+        .content-pic ul{
+            left:0px;
+            width: 600%;
+            position: absolute;
+        }
+
+        .content-pic ul li{
+            float:left;
+        }
+
+        .block{
+            position: absolute;
+            right:10px;
+            bottom:7px;
+        }
+
+        .block span{
+            border:1px solid #A6A6A6;
+            display: inline-block;
+            padding: 0 3px;
+            height:17px;
+            line-height: 17px;
+            background: #fff;
+        }
+
+        .block span.active{
+            background: orange;
+            color:#fff;
+        }
+
+        .toLeft{
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border:1px solid #fff;
+            background: #000;
+            opacity: 0.3;
+            left:5px;
+            top:50%;
+            margin-top: -20px;
+            cursor: pointer;
+        }
+
+        .toLeft span{
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            width: 40px;
+            font-size: 30px;
+            color:#fff;
+
+        }
+
+        .toRight{
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border:1px solid #fff;
+            background: #000;
+            opacity: 0.3;
+            right:5px;
+            top:50%;
+            margin-top: -20px;
+            cursor: pointer;
+        }
+
+        .toRight span{
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            width: 40px;
+            font-size: 30px;
+            color:#fff;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var box = document.getElementsByClassName("box")[0];
+            var toRight = document.getElementsByClassName("toRight")[0];
+            var toLeft = document.getElementsByClassName("toLeft")[0];
+            var spanArr = document.querySelectorAll(".block span");
+            var ul = document.querySelector(".content-pic ul");
+            var ani_timer;
+            var auto_timer;
+
+            //清除下标样式
+            function clearSpan(){
+                for(var i=0;i<spanArr.length;i++){
+                    spanArr[i].className = "";
+                }
+            }
+            //复制第一张图片到最后，实现无缝滚动（autoPlay）
+            var fir_pic = ul.children[0];
+            ul.appendChild(fir_pic.cloneNode(true));
+
+            //下标轮播
+            for(var i=0;i<spanArr.length;i++){
+                spanArr[i].index = i;
+                spanArr[i].onmouseover = function(){
+                    var target_active;
+                    clearSpan();
+                     this.className = "active";
+                     target_active = parseInt(this.index);
+                     //调用动画函数
+                    var spe = "";
+                    var tar_position = -(target_active)*490;
+
+                    animation(ul,tar_position,10);
+                }
+            }
+
+            //自动轮播
+            var key = 0;
+            auto_timer = setInterval(autoPlay,3000);
+
+            //鼠标移入,取消自动轮播
+            box.onmouseover = function(){
+                clearInterval(auto_timer);
+            }
+
+            box.onmouseout = function(){
+                auto_timer = setInterval(autoPlay,3000);
+            }
+
+            //左右箭头切换
+            toRight.onclick = function(){
+                key++;
+                clearSpan()
+
+                if(key>spanArr.length){
+                    key = 1;
+                    ul.style.left = 0 + "px";
+                }
+
+                if(key == 5){
+                    spanArr[0].className = "active";
+                }else{
+                    spanArr[key].className = "active";
+                }
+                var tar_position = -(key)*490;
+                animation(ul,tar_position,10);
+            }
+
+            toLeft.onclick = function(){
+                if(key!=5 && key!=0){
+                    key--;
+                    clearSpan();
+                    spanArr[key].className = "active";
+
+                    var tar_position = -(key)*490;
+                    animation(ul,tar_position,10);
+                }
+            }
+
+            function autoPlay(){
+                key++;
+                clearSpan();
+
+                if(key>spanArr.length){
+                    key = 1;
+                    ul.style.left = 0 + "px";
+                }
+
+                if(key == 5){
+                    spanArr[0].className = "active";
+                }else{
+                    spanArr[key].className = "active";
+                }
+                var tar_position = -(key)*490;
+                animation(ul,tar_position,10);
+            }
+
+
+            function animation(ele,tar_position,speed){
+                clearInterval(ani_timer);
+                var now_position = ele.offsetLeft;
+                var dif_val = now_position - tar_position;
+                var imgLength = 490;
+                switch (Math.abs(dif_val)/imgLength){
+                    case 1 : speed = 10;break;
+                    case 2 : speed = 20;break;
+                    case 3 : speed = 30;break;
+                    case 4 : speed = 40;break;
+                    default: speed = 10;break;
+                };
+                var tru_speed = tar_position>ele.offsetLeft?speed:-speed;
+                ani_timer = setInterval(function(){
+                    now_position = ele.offsetLeft;
+                    dif_val = now_position - tar_position;
+                    if(Math.abs(dif_val) <= Math.abs(speed)){
+                        clearInterval(ani_timer);
+                        ele.style.left = tar_position + "px";
+                    }else{
+                        ele.style.left = (ele.offsetLeft + tru_speed) + "px";
+                    }
+                },10);
+            }
+
+        }
+    </script>
+</head>
+<body>
+        <div class="box">
+            <div class="content-pic">
+                <ul>
+                    <li><img src="./images/01.jpg" alt=""></li>
+                    <li><img src="./images/02.jpg" alt=""></li>
+                    <li><img src="./images/03.jpg" alt=""></li>
+                    <li><img src="./images/04.jpg" alt=""></li>
+                    <li><img src="./images/05.jpg" alt=""></li>
+                </ul>
+            </div>
+            <div class="block">
+                <span class="active"><a href="#">1</a></span>
+                <span><a href="#">2</a></span>
+                <span><a href="#">3</a></span>
+                <span><a href="#">4</a></span>
+                <span><a href="#">5</a></span>
+            </div>
+            <div class="toLeft">
+                <span><</span>
+            </div>
+            <div class="toRight">
+                <span>></span>
+            </div>
+        </div>
+</body>
+</html>

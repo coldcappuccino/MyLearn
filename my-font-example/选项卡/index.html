@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+
+        ul,li{
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        .main-content{
+            margin-top: 200px;
+            margin-left: 500px;
+        }
+
+        .nav-tab{
+            height: 40px;
+            margin-bottom: 1px;
+        }
+
+        .nav-tab ul li{
+            float:left;
+            height:40px;
+            padding:0px 20px;
+            line-height: 20px;
+            border:1px solid #000000;
+            background: #999999;
+            color:#ffffff;
+            margin-left: -1px;
+        }
+
+        .nav-tab ul li a{
+            display: inline-block;
+            height:40px;
+            line-height: 40px;
+            color:#fff;
+        }
+
+        .nav-tab ul li.active{
+            border-bottom:none;
+            background:#A8A8A8 ;
+        }
+
+        .tab-block{
+            margin-top: 1px;
+            margin-left: -1px;
+            height:400px;
+        }
+
+
+        .tab-block .block-show{
+            background: #A8A8A8;
+            display:block;
+            width: 500px;
+            height: 400px;
+            text-align: center;
+            font-size: 30px;
+            padding-top: 10px;
+        }
+
+        .tab-block .block-hide{
+            display: none;
+        }
+
+
+    </style>
+    <script>
+        window.onload = function(){
+            var tabArr = document.querySelectorAll(".nav-tab ul li");
+            var blockArr = document.querySelectorAll(".tab-block div");
+            for(var i=0;i<tabArr.length;i++){
+                tabArr[i].index = i;
+                tabArr[i].onclick = function () {
+                    for(var j=0;j<tabArr.length;j++){
+                        tabArr[j].className = "";
+                        blockArr[j].className = "block-hide";
+                    }
+                    this.className = "active";
+                    blockArr[this.index].className = "block-show";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="main-content">
+    <div class="nav-tab">
+        <ul>
+            <li class="active"><a  href="#">选项卡1</a></li>
+            <li><a href="#">选项卡2</a></li>
+            <li><a href="#">选项卡3</a></li>
+            <li><a href="#">选项卡4</a></li>
+        </ul>
+    </div>
+    <div class="tab-block">
+        <div class="block-show"><p>面板一</p></div>
+        <div class="block-hide"><p>面板二</p></div>
+        <div class="block-hide"><p>面板三</p></div>
+        <div class="block-hide"><p>面板四</p></div>
+    </div>
+</div>
+</body>
+</html>

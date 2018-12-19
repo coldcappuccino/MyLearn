@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        ul,li{
+            list-style: none;
+        }
+
+        .top-search{
+            margin-top: 200px;
+            margin-left: 600px;
+        }
+
+        .top-search input{
+            width: 400px;
+            height: 20px;
+            vertical-align: top;
+        }
+
+        .top-search button{
+            height: 24px;
+            width: 100px;
+            margin-left: -1px;
+        }
+
+         #search-list.show{
+            border:1px solid #999;
+            border-top:none;
+            width: 402px;
+        }
+
+        #search-list.hide{
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var hot_message = ["hot1","hot2","hot3","hot4"];
+            var com_message = ["aaa","bbb","ccc","ddd"];
+
+            var search_input = document.querySelector(".top-search input");
+            var ul = document.getElementById("search-list");
+
+            search_input.onfocus = function(){
+                ul.className = "show";
+                if(this.value){
+                    get_li(this.value);
+                }else{
+                   get_li(null);
+                }
+            }
+
+            search_input.onblur = function () {
+                ul.className = "hide";
+            }
+
+            search_input.oninput = function (){
+                get_li(this.value);
+            }
+
+            function get_li(InpVal){
+                var temp_html = "";
+                if(InpVal != null){
+                    for(var i=0;i<com_message.length;i++){
+                        temp_html += "<li value='"+com_message[i]+"'>"+com_message[i]+"</li>";
+                    }
+                }else{
+                    for(var i=0;i<hot_message.length;i++){
+                        temp_html += "<li value='"+hot_message[i]+"'>"+hot_message[i]+"</li>";
+                    }
+                }
+                ul.innerHTML = temp_html;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="top-search">
+            <input type="text"><button>搜索</button>
+            <ul id="search-list" class="show">
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        body{
+            background: #A6A6A6;
+        }
+        
+        .main{
+            margin-left: 100px;
+            margin-top: 30px;
+        }
+
+        .top-text p:nth-child(1){
+            font-size: 20px;
+        }
+
+        .top-text p:nth-child(2){
+            font-size: 15px;
+        }
+
+        .top-text a{
+            color:#e78f23;
+        }
+
+        .pic-list img{
+            width: 75px;
+            height: 105px;
+        }
+
+        .pic-list a{
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .pic-show{
+            width: 250px;
+            height: 350px;
+            line-height: 350px;
+            text-align: center;
+            color:#999999;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .bottom-text{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="top-text">
+            <p>美女画廊</p>
+            <p><a href="#">注册</a></p>
+        </div>
+        <div class="pic-list">
+            <a href="#">
+                <img src="./images/1.jpg" alt="">
+            </a>
+            <a href="#">
+                <img src="./images/2.jpg" alt="">
+            </a>
+            <a href="#">
+                <img src="./images/3.jpg" alt="">
+            </a>
+            <a href="#">
+                <img src="./images/4.jpg" alt="">
+            </a>
+        </div>
+        <div class="pic-show">
+            <p>250*350</p>
+        </div>
+        <div class="bottom-text">
+            <p>选择一个图片</p>
+        </div>
+    </div>
+
+    <script>
+        var list = document.getElementsByClassName("pic-list");
+        var arrImg = list[0].getElementsByTagName("img");
+        var show = document.getElementsByClassName("pic-show")[0];
+
+        for(var i=0;i<arrImg.length;i++){
+            arrImg[i].onclick = function(){
+                show.innerHTML = "";
+                var img_src = this.src;
+                var creat_html = "<img src="+img_src+">";
+                show.innerHTML = creat_html;
+            }
+        }
+
+        var my_sel = document.getElementById("my");
+        var arr_option = my_sel.getElementsByTagName("option");
+        var choose3 = document.getElementById("choose3");
+        var cancel = document.getElementById("cancel");
+
+    </script>
+</body>
+</html>

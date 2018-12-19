@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            padding-top: 100px;
+            padding-left: 200px;
+        }
+
+        .small{
+            display: inline-block;
+            vertical-align: top;
+            border:1px solid #A6A6A6;
+            width: 350px;
+            height: 350px;
+            position: relative;
+        }
+
+        .big{
+            display: none;
+            margin-left: 10px;
+            border:1px solid #A6A6A6;
+            width: 350px;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big img{
+             position: absolute;
+             left:0px;
+             top:0px;
+         }
+
+        .mask{
+            width: 154px;
+            height: 154px;
+            background: rgba(255, 255, 0, 0.4);
+            top:0px;
+            position: absolute;
+            display: none;
+        }
+    </style>
+    <script src="scroll.js"></script>
+    <script>
+        window.onload = function(){
+            var small = document.getElementsByClassName("small")[0];
+            var big = document.getElementsByClassName("big")[0];
+            var mask = document.getElementsByClassName("mask")[0];
+            var bigimg = big.getElementsByTagName("img")[0];
+            function draw_maskAndBig(event){
+
+                var mouseToTop = event.pageY || event.clientY + scroll().top;
+                var mouseToLeft = event.pageX || event.clientX + scroll().left;
+                var domToTop = small.offsetTop;
+                var domToLeft = small.offsetLeft;
+                var truTop = mouseToTop - domToTop;
+                var truLeft = mouseToLeft - domToLeft;
+
+                var maskWidth = 154;
+                var maskHeight = 154;
+
+                var limitLeft = Math.ceil(maskWidth/2);
+                var limitRight = Math.ceil(small.offsetWidth - maskWidth/2);
+                var limitTop = Math.ceil(maskHeight/2);
+                var limitBottom = Math.ceil(small.offsetHeight - maskHeight/2);
+
+                if(truLeft < limitLeft){
+                    mask.style.left = "0px";
+                }else{
+                    if(truLeft > limitRight){
+                        mask.style.left = (small.offsetWidth - maskWidth) + "px"
+                    }else{
+                        mask.style.left = (truLeft-maskWidth/2) + "px";
+                    }
+                }
+
+                if(truTop < limitTop){
+                    mask.style.top = "0px";
+                }else{
+                    if(truTop > limitBottom){
+                        mask.style.top = (small.offsetHeight - maskHeight) + "px"
+                    }else{
+                        mask.style.top = (truTop-maskHeight/2) + "px";
+                    }
+                }
+                mask.style.display = "block";
+
+                var targetBigLeft = Math.ceil(mask.offsetLeft*small.offsetWidth/maskWidth);
+                var targetBigTop = Math.ceil(mask.offsetTop*small.offsetHeight/maskHeight);
+
+                bigimg.style.left = -targetBigLeft + "px";
+                bigimg.style.top = -targetBigTop + "px";
+                big.style.display = "inline-block";
+            }
+
+            small.onmouseover = function(){
+                small.onmousemove = function(event){
+                    event = event || window.event;
+                    //阻止事件传播
+                    if(event && event.stopPropagation){
+                        event.stopPropagation();
+                    }else{
+                        event.cancelBubble = true;
+                    }
+
+                    draw_maskAndBig(event);
+                }
+            }
+
+            small.onmouseout = function(event){
+                if(event && event.stopPropagation){
+                    event.stopPropagation();
+                }else{
+                    event.cancelBubble = true;
+                }
+
+                big.style.display = "none";
+                mask.style.display = "none";
+                small.onmousemove = null;
+            }
+
+        }
+    </script>
+</head>
+<body>
+   <div class="small">
+        <img src="./images/001.jpg" alt="">
+        <div class="mask">
+        </div>
+   </div>
+   </div>
+   <div class="big">
+       <img src="./images/0001.jpg" alt="">
+   </div>
+</body>
+</html>

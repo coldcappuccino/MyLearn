@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            padding-top: 10px;
+        }
+
+        img{
+            position: absolute;
+            top:0;
+            left:0;
+            width: 100px;
+        }
+    </style>
+    <script src="scroll.js"></script>
+    <script>
+        window.onload = function(){
+            var img = document.getElementsByTagName("img")[0];
+            var timer;
+            document.onclick = function(event){
+                clearInterval(timer);
+                event = event || window.event;
+                var targetY = (event.pageY || event.clientY + scroll().top) - img.offsetHeight/2;
+                var targetX = (event.pageX || event.clientX + scroll().left) - img.offsetWidth/2;
+                targetX = parseInt(targetX);
+                targetY = parseInt(targetY);
+                timer = setInterval(function(){
+                    var now_positionY = img.offsetTop;
+                    var now_positionX = img.offsetLeft;
+                    var dif_valY = targetY - now_positionY;
+                    var dif_valX = targetX - now_positionX;
+
+                    if(dif_valX === 0 && dif_valY === 0){
+                        clearInterval(timer);
+                        console.log("is stop");
+                    }else{
+                        var speedY = (dif_valY/10)>0 ? Math.ceil(dif_valY/10) : Math.floor(dif_valY/10);
+                        var speedX = (dif_valX/10)>0 ? Math.ceil(dif_valX/10) : Math.floor(dif_valX/10);
+                        img.style.top = now_positionY + speedY + "px";
+                        img.style.left = now_positionX + speedX + "px";
+                    }
+                },30)
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="img.jpg" alt="">
+</body>
+</html>

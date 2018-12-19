@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+
+        }
+
+        table{
+            margin: 0 auto;
+            margin-top: 150px;
+            border:1px solid #999999;
+        }
+
+        table th{
+            background:	#33CCFF;
+            padding:10px 20px;
+            color:#ffffff;
+        }
+        table td{
+            padding:10px 0;
+        }
+
+        table td:nth-child(1){
+            padding:10px 20px;
+        }
+
+        table td:nth-child(4){
+            padding:10px 20px;
+        }
+
+        table th,td{
+            border:1px solid #999999;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var theadInp = document.getElementById("theadInp");
+            var tbodyInpArr = document.querySelectorAll("tbody tr td:first-child input");
+
+            theadInp.onclick = function(){
+                for(var i=0;i<tbodyInpArr.length;i++){
+                    tbodyInpArr[i].checked = this.checked;
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <table border="1px solid #C0C0C0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    <input id="theadInp" type="checkbox"/>
+                </th>
+                <th>饭店1</th>
+                <th>饭店2</th>
+                <th>饭店3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input  type="checkbox"/>
+                </td>
+                <td>菜品1</td>
+                <td>菜品2</td>
+                <td>菜品3</td>
+            </tr>
+            <tr>
+                <td>
+                    <input  type="checkbox"/>
+                </td>
+                <td>菜品1</td>
+                <td>菜品2</td>
+                <td>菜品3</td>
+            </tr>
+            <tr>
+                <td>
+                    <input  type="checkbox"/>
+                </td>
+                <td>菜品1</td>
+                <td>菜品2</td>
+                <td>菜品3</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
